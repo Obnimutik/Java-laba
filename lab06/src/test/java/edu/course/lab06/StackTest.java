@@ -1,0 +1,49 @@
+package edu.course.lab06;
+
+import org.junit.jupiter.api.Test;
+import java.util.NoSuchElementException;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StackTest {
+
+    @Test
+    void newStackIsEmpty() {
+        Stack<String> stack = new Stack<>();
+        assertTrue(stack.isEmpty());
+        assertEquals(0, stack.size());
+    }
+
+    @Test
+    void pushAndPeekWorks() {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(10);
+        stack.push(20);
+        assertEquals(2, stack.size());
+        assertEquals(20, stack.peek()); // peek не удаляет
+        assertEquals(2, stack.size());
+    }
+
+    @Test
+    void popReturnsAndRemovesElement() {
+        Stack<String> stack = new Stack<>();
+        stack.push("A");
+        stack.push("B");
+        assertEquals("B", stack.pop());
+        assertEquals(1, stack.size());
+        assertEquals("A", stack.pop());
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    void popAndPeekOnEmptyThrowException() {
+        Stack<Double> stack = new Stack<>();
+        assertThrows(NoSuchElementException.class, stack::pop);
+        assertThrows(NoSuchElementException.class, stack::peek);
+    }
+
+    @Test
+    void pushNullThrowsException() {
+        Stack<String> stack = new Stack<>();
+        assertThrows(IllegalArgumentException.class, () -> stack.push(null));
+    }
+}
